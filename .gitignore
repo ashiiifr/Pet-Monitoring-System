@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pkl
+*.pyc
+
+# Environment
+.env
+.venv
+venv/
+
+# Build
+dist/
+build/
+.expo/
+web-build/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
