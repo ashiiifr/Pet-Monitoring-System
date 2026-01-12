@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-text-primary antialiased selection:bg-accent/20 selection:text-accent;
+  }
+}
+
+@layer components {
+
+  /* "Bento Box" Card Utility */
+  .bento-card {
+    @apply bg-surface border border-border rounded-xl p-6 transition-all duration-300 hover:border-borderHighlight relative overflow-hidden;
+  }
+
+  .bento-card::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-tr from-white/[0.02] to-transparent opacity-0 transition-opacity duration-300 pointer-events-none;
+  }
+
+  .bento-card:hover::after {
+    @apply opacity-100;
+  }
+
+  .btn-primary {
+    @apply bg-accent text-white px-4 py-2 rounded-lg font-medium text-sm transition-all hover:bg-accent-hover active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply text-text-secondary hover:text-text-primary hover:bg-white/5 px-3 py-2 rounded-lg transition-colors;
+  }
+}
+
+/* Custom Scrollbar for that "Industrial" feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-border rounded-full hover:bg-borderHighlight;
+}

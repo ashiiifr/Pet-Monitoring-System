@@ -1,0 +1,37 @@
+{
+  "features": [
+    "hour_of_day",
+    "heart_rate",
+    "body_temperature",
+    "accel_magnitude",
+    "gyro_x",
+    "gyro_y",
+    "gyro_z",
+    "ambient_temperature",
+    "humidity",
+    "activity_level",
+    "step_count",
+    "sleep_indicator",
+    "movement_intensity",
+    "distance_meters",
+    "calories_burned",
+    "stress_score",
+    "home_distance_m",
+    "geofence_alert"
+  ],
+  "classes": [
+    "anxiety",
+    "arthritis",
+    "dehydration",
+    "fever",
+    "healthy"
+  ],
+  "metrics": {
+    "accuracy": 0.9603174603174603,
+    "precision": 0.9602613272988345,
+    "recall": 0.9603174603174603,
+    "f1_score": 0.9552763439072453
+  },
+  "trained_at": "2026-01-06T23:34:24.296376",
+  "model_version": "1.0.0"
+}

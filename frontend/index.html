@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetVitals - AI Pet Health Monitor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">🐾</span>
+                <span class="logo-text">PetVitals</span>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-page="pet-profile">
+                    <span class="nav-icon">🐕</span>
+                    <span>Pet Profile</span>
+                </a>
+                <a href="#" class="nav-item" data-page="activity">
+                    <span class="nav-icon">🏃</span>
+                    <span>Activity</span>
+                </a>
+                <a href="#" class="nav-item" data-page="alerts">
+                    <span class="nav-icon">🔔</span>
+                    <span>Alerts</span>
+                </a>
+                <a href="#" class="nav-item" data-page="settings">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Settings</span>
+                </a>
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="team-info">Team 12</div>
+            </div>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <h1>Dashboard</h1>
+                    <p class="subtitle">Monitor your pet's health in real-time</p>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-primary" id="refreshBtn">
+                        <span class="btn-icon">🔄</span>
+                        Refresh Data
+                    </button>
+                    <div class="connection-status" id="connectionStatus">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Connected</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Health Score Card -->
+            <section class="health-score-section">
+                <div class="health-score-card">
+                    <div class="score-ring" id="healthScoreRing">
+                        <svg viewBox="0 0 100 100">
+                            <circle class="ring-bg" cx="50" cy="50" r="45"/>
+                            <circle class="ring-progress" cx="50" cy="50" r="45" id="scoreProgress"/>
+                        </svg>
+                        <div class="score-value">
+                            <span class="score-number" id="healthScore">--</span>
+                            <span class="score-label">Health Score</span>
+                        </div>
+                    </div>
+                    <div class="health-status" id="healthStatus">
+                        <span class="status-badge loading">Analyzing...</span>
+                    </div>
+                </div>
+                
+                <div class="alerts-card" id="alertsCard">
+                    <h3>Alerts & Recommendations</h3>
+                    <div class="alerts-list" id="alertsList">
+                        <div class="alert-item info">
+                            <span class="alert-icon">ℹ️</span>
+                            <span>Loading health data...</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Vital Signs -->
+            <section class="vitals-section">
+                <h2>Vital Signs</h2>
+                <div class="vitals-grid">
+                    <div class="vital-card">
+                        <div class="vital-icon heart">❤️</div>
+                        <div class="vital-info">
+                            <span class="vital-value" id="heartRate">--</span>
+                            <span class="vital-unit">BPM</span>
+                            <span class="vital-label">Heart Rate</span>
+                        </div>
+                        <div class="vital-trend" id="heartRateTrend">--</div>
+                    </div>
+                    
+                    <div class="vital-card">
+                        <div class="vital-icon temp">🌡️</div>
+                        <div class="vital-info">
+                            <span class="vital-value" id="bodyTemp">--</span>
+                            <span class="vital-unit">°C</span>
+                            <span class="vital-label">Body Temperature</span>
+                        </div>
+                        <div class="vital-trend" id="bodyTempTrend">--</div>
+                    </div>
+                    
+                    <div class="vital-card">
+                        <div class="vital-icon activity">⚡</div>
+                        <div class="vital-info">
+                            <span class="vital-value" id="activityLevel">--</span>
+                            <span class="vital-unit">/100</span>
+                            <span class="vital-label">Activity Level</span>
+                        </div>
+                        <div class="vital-trend" id="activityTrend">--</div>
+                    </div>
+                    
+                    <div class="vital-card">
+                        <div class="vital-icon stress">😌</div>
+                        <div class="vital-info">
+                            <span class="vital-value" id="stressScore">--</span>
+                            <span class="vital-unit">/100</span>
+                            <span class="vital-label">Stress Score</span>
+                        </div>
+                        <div class="vital-trend" id="stressTrend">--</div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Activity Metrics -->
+            <section class="metrics-section">
+                <h2>Activity Metrics</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-icon">👣</span>
+                        <div class="metric-info">
+                            <span class="metric-value" id="stepCount">--</span>
+                            <span class="metric-label">Steps</span>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <span class="metric-icon">🔥</span>
+                        <div class="metric-info">
+                            <span class="metric-value" id="calories">--</span>
+                            <span class="metric-label">Calories</span>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <span class="metric-icon">📍</span>
+                        <div class="metric-info">
+                            <span class="metric-value" id="distance">--</span>
+                            <span class="metric-label">Distance (m)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <span class="metric-icon">😴</span>
+                        <div class="metric-info">
+                            <span class="metric-value" id="sleepStatus">--</span>
+                            <span class="metric-label">Sleep Status</span>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <span class="metric-icon">🌡️</span>
+                        <div class="metric-info">
+                            <span class="metric-value" id="ambientTemp">--</span>
+                            <span class="metric-label">Ambient °C</span>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <span class="metric-icon">💧</span>
+                        <div class="metric-info">
+                            <span class="metric-value" id="humidity">--</span>
+                            <span class="metric-label">Humidity %</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Prediction Probabilities -->
+            <section class="prediction-section">
+                <h2>AI Health Analysis</h2>
+                <div class="prediction-card">
+                    <div class="prediction-header">
+                        <span class="prediction-title">Classification Confidence</span>
+                        <span class="prediction-confidence" id="predictionConfidence">--% confident</span>
+                    </div>
+                    <div class="probability-bars" id="probabilityBars">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Demo Controls -->
+            <section class="demo-section">
+                <h2>Simulation Controls</h2>
+                <p class="demo-description">Test the AI with different health scenarios</p>
+                <div class="demo-buttons">
+                    <button class="btn btn-success" id="demoHealthy">😊 Healthy Pet</button>
+                    <button class="btn btn-warning" id="demoFever">🤒 Fever Scenario</button>
+                    <button class="btn btn-danger" id="demoAnxiety">😰 Anxiety Scenario</button>
+                    <button class="btn btn-secondary" id="demoRandom">🎲 Random Data</button>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
