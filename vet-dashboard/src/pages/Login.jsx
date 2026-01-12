@@ -16,10 +16,10 @@ function Login({ onLogin }) {
         setError('')
         try {
             if (isRegistering) {
-                await api.post('/register', { email, password, name, role: 'vet' })
+                await api.post('/auth/register', { email, password, name, role: 'vet' })
             }
-            const res = await api.post('/login', { email, password })
-            onLogin(res.data.access_token, res.data.user)
+            const res = await api.post('/auth/login', { email, password })
+            onLogin(res.data.token, res.data.user)
             navigate('/dashboard')
         } catch (err) {
             setError(err.response?.data?.error || 'Authentication failed')

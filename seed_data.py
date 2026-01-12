@@ -1,8 +1,13 @@
 import sqlite3
 import os
-from werkzeug.security import generate_password_hash
+from flask_bcrypt import Bcrypt
+from flask import Flask
 
 DATABASE = 'pet_health.db'
+
+# Create a dummy app context for Bcrypt
+app = Flask(__name__)
+bcrypt = Bcrypt(app)
 
 def seed_data():
     if os.path.exists(DATABASE):
@@ -39,13 +44,13 @@ def seed_data():
     ''')
 
     # 1. Create Vet Admin
-    vet_pw = generate_password_hash('vet123')
+    vet_pw = bcrypt.generate_password_hash('vet123').decode('utf-8')
     c.execute("INSERT INTO users (email, password_hash, name, role) VALUES (?, ?, ?, ?)",
               ('vet@clinic.com', vet_pw, 'Dr. Sarah Smith', 'vet'))
     print("Created Vet: Dr. Sarah Smith")
 
     # 2. Create Pet Owner
-    owner_pw = generate_password_hash('demo123')
+    owner_pw = bcrypt.generate_password_hash('demo123').decode('utf-8')
     c.execute("INSERT INTO users (email, password_hash, name, role) VALUES (?, ?, ?, ?)",
               ('demo@petowner.com', owner_pw, 'John Doe', 'owner'))
     owner_id = c.lastrowid
